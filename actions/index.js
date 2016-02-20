@@ -8,3 +8,9 @@ export const placePebble = (pebble) => {
         pebble: pebble
     };
 };
+
+export const completeTurn = () => {
+    return {
+        type: 'completeTurn'
+    };
+};
