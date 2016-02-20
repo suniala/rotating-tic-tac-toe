@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
 import count from './counter'
+import slot from './slot'
 
 const gameApp = combineReducers(
         {
-            count
+            count,
+            slot
         }
 );
 
