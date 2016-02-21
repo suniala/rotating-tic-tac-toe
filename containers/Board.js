@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { completeTurn, placePebble } from '../actions'
+import { completeTurn, placePebble, rotate, directionCounterClockwise, directionClockwise } from '../actions'
 import SlotGrid from '../components/SlotGrid'
 
 function mapStateToProps(state) {
@@ -14,6 +14,14 @@ function mapDispatchToProps(dispatch) {
         onPlacePebble: (id, turn) => {
             dispatch(placePebble(id, turn));
             dispatch(completeTurn());
+        },
+
+        onRotateCounterClockwise: () => {
+            dispatch(rotate(directionCounterClockwise));
+        },
+
+        onRotateClockwise: () => {
+            dispatch(rotate(directionClockwise));
         }
     };
 }

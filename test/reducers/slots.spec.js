@@ -1,4 +1,5 @@
 import expect from 'expect'
+import { directionCounterClockwise, directionClockwise} from '../../actions'
 import { slots, configure as configureSlots } from '../../reducers/slots'
 
 configureSlots(2, 2);
@@ -28,6 +29,13 @@ const defaultSlots = () => (
         ]
 );
 
+const slot = (id, pebble) => {
+    return {
+        id,
+        pebble
+    };
+};
+
 describe('slots reducer', () => {
     it('should handle initial state', () => {
         let actual = slots(undefined, {});
@@ -53,5 +61,34 @@ describe('slots reducer', () => {
             pebble: 'black'
         });
         expect(state).toEqual(expected);
+    });
+
+    it('should handle rotate', () => {
+        let state = [
+            [slot(1, null), slot(2, 'white')],
+            [slot(3, 'black'), slot(4, null)]
+        ];
+
+        state = slots(state, {
+            type: 'rotate',
+            direction: directionClockwise
+        });
+        expect(state).toEqual(
+                [
+                    [slot(3, 'black'), slot(1, null)],
+                    [slot(4, null), slot(2, 'white')]
+                ]
+        );
+
+        state = slots(state, {
+            type: 'rotate',
+            direction: directionCounterClockwise
+        });
+        expect(state).toEqual(
+                [
+                    [slot(1, null), slot(2, 'white')],
+                    [slot(3, 'black'), slot(4, null)]
+                ]
+        );
     });
 });

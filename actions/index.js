@@ -6,6 +6,15 @@ export const placePebble = (id, pebble) => {
     };
 };
 
+export const directionCounterClockwise = 'counterClockwise';
+export const directionClockwise = 'clockwise';
+export const rotate = (direction) => {
+    return {
+        type: 'rotate',
+        direction: direction
+    }
+};
+
 export const completeTurn = () => {
     return {
         type: 'completeTurn'
