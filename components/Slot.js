@@ -5,7 +5,7 @@ const Slot = ({ pebble, turn, onPlacePebble }) => (
             <div style={{width: "100px", height: "20px", border: "1px solid black", display: "inline-block"}}>
                 {pebble}
             </div>
-            <button onClick={() => {onPlacePebble(turn)}}>Set {turn}</button>
+            <button onClick={() => {onPlacePebble(turn)}}>Place pebble</button>
         </div>
 );
 
