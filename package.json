@@ -1,7 +1,7 @@
 {
-  "name": "redux-practice-game",
+  "name": "rotating-tic-tac-toe",
   "version": "0.0.0",
-  "description": "Practicing Redux Programming",
+  "description": "Tic Tac Toe With Rotating Grids",
   "scripts": {
     "start": "node server.js",
     "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",

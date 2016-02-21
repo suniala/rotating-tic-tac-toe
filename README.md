@@ -1,1 +1,6 @@
-# rotating-tic-tac-toe
+# Tic Tac Toe With Rotating Grids
+
+Implemented with:
+
+ * React
+ * Redux
