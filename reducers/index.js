@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import slot from './slot'
+import { slots } from './slots'
 import turn from './turn'
 
 const gameApp = combineReducers(
         {
-            slot,
+            slots,
             turn
         }
 );

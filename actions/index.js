@@ -1,6 +1,8 @@
-export const placePebble = (pebble) => {
+export const placePebble = (col, row, pebble) => {
     return {
         type: 'placePebble',
+        col: col,
+        row: row,
         pebble: pebble
     };
 };

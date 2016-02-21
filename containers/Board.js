@@ -1,26 +1,26 @@
 import { connect } from 'react-redux'
 import { completeTurn, placePebble } from '../actions'
-import Slot from '../components/Slot'
+import SlotGrid from '../components/SlotGrid'
 
 function mapStateToProps(state) {
     return {
-        pebble: state.slot,
+        slots: state.slots,
         turn: state.turn
-    }
+    };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        onPlacePebble: (pebble) => {
-            dispatch(placePebble(pebble));
+        onPlacePebble: (col, row, turn) => {
+            dispatch(placePebble(col, row, turn));
             dispatch(completeTurn());
         }
-    }
+    };
 }
 
-const Grid = connect(
+const Board = connect(
         mapStateToProps,
         mapDispatchToProps
-)(Slot);
+)(SlotGrid);
 
-export default Grid;
+export default Board;

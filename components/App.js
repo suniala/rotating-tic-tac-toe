@@ -1,11 +1,11 @@
 import React from 'react'
-import Grid from '../containers/Grid'
+import Board from '../containers/Board'
 import Info from '../containers/Info'
 
 const App = () => (
         <div>
             <Info />
-            <Grid />
+            <Board />
         </div>
 );
 
