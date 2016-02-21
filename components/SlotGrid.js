@@ -2,25 +2,25 @@ import React, { PropTypes } from 'react'
 import Slot from './Slot'
 
 const SlotGrid = ({ slots, turn, onPlacePebble }) => (
-        <ol>
+        <table>
             {
                 slots.map(slotRow => (
-                                  <li>
-                                      <ol>
-                                          {
-                                              slotRow.map(slot =>
+                                  <tr>
+                                      {
+                                          slotRow.map(slot =>
+                                                              <td>
                                                                   <Slot
                                                                           pebble={slot.pebble}
                                                                           onClick={() => onPlacePebble(slot.id, turn)}
                                                                   />
-                                              )
-                                          }
-                                      </ol>
-                                  </li>
+                                                              </td>
+                                          )
+                                      }
+                                  </tr>
                           )
                 )
             }
-        </ol>
+        </table>
 );
 
 SlotGrid.propTypes = {
