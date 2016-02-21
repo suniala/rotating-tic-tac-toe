@@ -58,44 +58,77 @@ const slotRow = (state, action) => {
     }
 };
 
-class CRotationIterator {
+class BaseRotateSquareIterator {
     constructor(table) {
+        for (let row = 0; row < table.length; row++) {
+            if (table.length != table[row].length) {
+                throw "Looks like the table is not square";
+            }
+        }
         this.table = table;
-        this.colIdx = 0;
-        this.rowIdx = table.length - 1;
+        this.sideLength = table.length;
+        this.colIdx = this.initialColIdx(table);
+        this.rowIdx = this.initialRowIdx(table);
+    }
+
+    initialRowIdx(table) {
+    }
+
+    initialColIdx(table) {
+    }
+
+    updateIdx() {
     }
 
     next() {
         let item = this.table[this.rowIdx][this.colIdx];
+        this.updateIdx();
+        return item;
+    }
+}
 
+class RotateSquareClockwiseIterator extends BaseRotateSquareIterator {
+    constructor(table) {
+        super(table);
+    }
+
+    initialRowIdx(table) {
+        return table.length - 1;
+    }
+
+    initialColIdx(table) {
+        return 0;
+    }
+
+    updateIdx() {
         this.rowIdx--;
         if (this.rowIdx < 0) {
             this.rowIdx = this.table.length - 1;
 
             this.colIdx++;
         }
-
-        return item;
     }
 }
 
-class CCRotationIterator {
+class RotateSquareCounterClockwiseIterator extends BaseRotateSquareIterator {
     constructor(table) {
-        this.table = table;
-        this.colIdx = table[0].length - 1;
-        this.rowIdx = 0;
+        super(table);
     }
 
-    next() {
-        let item = this.table[this.rowIdx][this.colIdx];
+    initialRowIdx(table) {
+        return 0;
+    }
 
+    initialColIdx(table) {
+        return table[0].length - 1;
+    }
+
+    updateIdx() {
         this.rowIdx++;
         if (this.rowIdx >= this.table.length) {
             this.rowIdx = 0;
             this.colIdx--;
         }
-
-        return item;
     }
 }
 
@@ -104,31 +137,23 @@ const slots = (state = initSlots(), action) => {
         case 'placePebble':
             return state.map(t => slotRow(t, action));
         case 'rotate':
+            let rotatedSquareIterator;
             if (directionClockwise === action.direction) {
-                let slots = [];
-                let iterator = new CRotationIterator(state);
-
-                for (let row = 0; row < state.length; row++) {
-                    slots[row] = [];
-                    for (let col = 0; col < state[0].length; col++) {
-                        slots[row][col] = iterator.next();
-                    }
-                }
-
-                return slots;
+                rotatedSquareIterator = new RotateSquareClockwiseIterator(state);
             } else {
-                let slots = [];
-                let iterator = new CCRotationIterator(state);
-
-                for (let row = 0; row < state.length; row++) {
-                    slots[row] = [];
-                    for (let col = 0; col < state[0].length; col++) {
-                        slots[row][col] = iterator.next();
-                    }
-                }
-
-                return slots;
+                rotatedSquareIterator = new RotateSquareCounterClockwiseIterator(state);
             }
+
+            let slots = [];
+
+            for (let row = 0; row < rotatedSquareIterator.sideLength; row++) {
+                slots[row] = [];
+                for (let col = 0; col < rotatedSquareIterator.sideLength; col++) {
+                    slots[row][col] = rotatedSquareIterator.next();
+                }
+            }
+
+            return slots;
         default:
             return state;
     }
