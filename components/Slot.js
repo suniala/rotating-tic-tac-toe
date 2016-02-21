@@ -1,17 +1,18 @@
 import React, { PropTypes } from 'react'
 
-const Slot = ({ pebble, turn, onPlacePebble }) => (
+const Slot = ({ col, row, pebble, onPlacePebble }) => (
         <div>
             <div style={{width: "100px", height: "20px", border: "1px solid black", display: "inline-block"}}>
                 {pebble}
             </div>
-            <button onClick={() => {onPlacePebble(turn)}}>Place pebble</button>
+            <button onClick={() => {onPlacePebble()}}>Place pebble</button>
         </div>
 );
 
 Slot.propTypes = {
+    col: PropTypes.number.isRequired,
+    row: PropTypes.number.isRequired,
     pebble: PropTypes.string,
-    turn: PropTypes.string.isRequired,
     onPlacePebble: PropTypes.func.isRequired
 };
 
