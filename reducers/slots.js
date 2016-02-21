@@ -6,14 +6,25 @@ const configure = (newColCount, newRowCount) => {
     rowCount = newRowCount;
 };
 
+class IdSequence {
+    constructor() {
+        this.sequence = 0;
+    }
+
+    next() {
+        return ++this.sequence;
+    }
+}
+
 const initSlots = () => {
     let slots = [];
+    let idSequence = new IdSequence();
+
     for (let row = 0; row < rowCount; row++) {
         slots[row] = [];
         for (let col = 0; col < colCount; col++) {
             slots[row][col] = {
-                col: col,
-                row: row,
+                id: idSequence.next(),
                 pebble: null
             };
         }
@@ -24,7 +35,7 @@ const initSlots = () => {
 const slot = (state, action) => {
     switch (action.type) {
         case 'placePebble':
-            if (state.col !== action.col || state.row !== action.row) {
+            if (state.id !== action.id) {
                 return state;
             }
 
@@ -39,10 +50,6 @@ const slot = (state, action) => {
 const slotRow = (state, action) => {
     switch (action.type) {
         case 'placePebble':
-            if (state[0].row !== action.row) {
-                return state;
-            }
-
             return state.map(t => slot(t, action));
         default:
             return state;

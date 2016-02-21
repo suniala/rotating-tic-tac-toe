@@ -1,8 +1,7 @@
-export const placePebble = (col, row, pebble) => {
+export const placePebble = (id, pebble) => {
     return {
         type: 'placePebble',
-        col: col,
-        row: row,
+        id: id,
         pebble: pebble
     };
 };

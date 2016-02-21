@@ -10,10 +10,8 @@ const SlotGrid = ({ slots, turn, onPlacePebble }) => (
                                           {
                                               slotRow.map(slot =>
                                                                   <Slot
-                                                                          row={slot.row}
-                                                                          col={slot.col}
                                                                           pebble={slot.pebble}
-                                                                          onClick={() => onPlacePebble(slot.col, slot.row, turn)}
+                                                                          onClick={() => onPlacePebble(slot.id, turn)}
                                                                   />
                                               )
                                           }
@@ -30,8 +28,7 @@ SlotGrid.propTypes = {
             PropTypes.arrayOf(
                     PropTypes.shape(
                             {
-                                col: PropTypes.number.isRequired,
-                                row: PropTypes.number.isRequired,
+                                id: PropTypes.number.isRequired,
                                 pebble: PropTypes.string
                             }
                     )

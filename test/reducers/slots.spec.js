@@ -7,26 +7,22 @@ const defaultSlots = () => (
         [
             [
                 {
-                    "col": 0,
-                    "pebble": null,
-                    "row": 0
+                    id: 1,
+                    pebble: null
                 },
                 {
-                    "col": 1,
-                    "pebble": null,
-                    "row": 0
+                    id: 2,
+                    pebble: null
                 }
             ],
             [
                 {
-                    "col": 0,
-                    "pebble": null,
-                    "row": 1
+                    id: 3,
+                    pebble: null
                 },
                 {
-                    "col": 1,
-                    "pebble": null,
-                    "row": 1
+                    id: 4,
+                    pebble: null
                 }
             ]
         ]
@@ -45,8 +41,7 @@ describe('slots reducer', () => {
         let state = defaultSlots();
         state = slots(state, {
             type: 'placePebble',
-            col: 0,
-            row: 1,
+            id: 3,
             pebble: 'white'
         });
         expect(state).toEqual(expected);
@@ -54,8 +49,7 @@ describe('slots reducer', () => {
         expected[0][1].pebble = 'black';
         state = slots(state, {
             type: 'placePebble',
-            col: 1,
-            row: 0,
+            id: 2,
             pebble: 'black'
         });
         expect(state).toEqual(expected);

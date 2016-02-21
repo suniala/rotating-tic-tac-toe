@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-const Slot = ({ col, row, pebble, onClick }) => (
+const Slot = ({ pebble, onClick }) => (
         <div>
             <div style={{width: "100px", height: "20px", border: "1px solid black", display: "inline-block"}}>
                 {pebble}
@@ -10,8 +10,6 @@ const Slot = ({ col, row, pebble, onClick }) => (
 );
 
 Slot.propTypes = {
-    col: PropTypes.number.isRequired,
-    row: PropTypes.number.isRequired,
     pebble: PropTypes.string,
     onClick: PropTypes.func.isRequired
 };

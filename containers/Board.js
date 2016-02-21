@@ -11,8 +11,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        onPlacePebble: (col, row, turn) => {
-            dispatch(placePebble(col, row, turn));
+        onPlacePebble: (id, turn) => {
+            dispatch(placePebble(id, turn));
             dispatch(completeTurn());
         }
     };
