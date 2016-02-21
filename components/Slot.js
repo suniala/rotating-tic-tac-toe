@@ -1,16 +1,18 @@
 import React, { PropTypes } from 'react'
 
-const Slot = ({ pebble, onClick }) => (
+const Slot = ({ pebble, enabled, onClick }) => (
         <div>
-            <div
+            <button
+                    disabled={!enabled}
                     onClick={() => {onClick()}}
-                    style={{width: "20px", height: "20px", border: "1px solid black", overflow: "hidden"}}>
+                    style={{width: "30px", height: "30px", overflow: "hidden"}}>
                 {pebble}
-            </div>
+            </button>
         </div>
 );
 
 Slot.propTypes = {
+    enabled: PropTypes.bool.isRequired,
     pebble: PropTypes.string,
     onClick: PropTypes.func.isRequired
 };

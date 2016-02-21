@@ -1,11 +1,19 @@
-const turn = (state = 'white', action) => {
+const initialState = () => {
+    return {player: 'black', phase: 'place'};
+};
+
+const turn = (state = initialState(), action) => {
     switch (action.type) {
-        case 'completeTurn':
-            if (state === 'white') {
-                return 'black';
+        case 'rotate':
+            let nextPlayer;
+            if (state.player === 'white') {
+                nextPlayer = 'black';
             } else {
-                return 'white';
+                nextPlayer = 'white';
             }
+            return Object.assign(initialState(), {player: nextPlayer});
+        case 'placePebble':
+            return Object.assign({}, state, {phase: 'rotate'});
         default:
             return state;
     }

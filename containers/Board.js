@@ -13,7 +13,6 @@ function mapDispatchToProps(dispatch) {
     return {
         onPlacePebble: (id, turn) => {
             dispatch(placePebble(id, turn));
-            dispatch(completeTurn());
         },
 
         onRotateCounterClockwise: () => {

@@ -3,8 +3,8 @@ import Slot from './Slot'
 
 const SlotGrid = ({ slots, turn, onPlacePebble, onRotateCounterClockwise, onRotateClockwise }) => (
         <div>
-            <button onClick={onRotateCounterClockwise}>counter clockwise</button>
-            <button onClick={onRotateClockwise}>clockwise</button>
+            <button disabled={turn.phase !== 'rotate'} onClick={onRotateCounterClockwise}>counter clockwise</button>
+            <button disabled={turn.phase !== 'rotate'} onClick={onRotateClockwise}>clockwise</button>
             <table>
                 {
                     slots.map(slotRow => (
@@ -13,8 +13,9 @@ const SlotGrid = ({ slots, turn, onPlacePebble, onRotateCounterClockwise, onRota
                                               slotRow.map(slot =>
                                                                   <td>
                                                                       <Slot
+                                                                              enabled={turn.phase === 'place' && slot.pebble == null}
                                                                               pebble={slot.pebble}
-                                                                              onClick={() => onPlacePebble(slot.id, turn)}
+                                                                              onClick={() => onPlacePebble(slot.id, turn.player)}
                                                                       />
                                                                   </td>
                                               )
@@ -38,7 +39,12 @@ SlotGrid.propTypes = {
                     )
             ).isRequired
     ).isRequired,
-    turn: PropTypes.string.isRequired,
+    turn: React.PropTypes.shape(
+            {
+                player: PropTypes.string.isRequired,
+                phase: PropTypes.string.isRequired
+            }
+    ).isRequired,
     onPlacePebble: PropTypes.func.isRequired,
     onRotateCounterClockwise: PropTypes.func.isRequired,
     onRotateClockwise: PropTypes.func.isRequired
